@@ -1,0 +1,109 @@
+Requirement:
+------------
+
+You should have ImageMagick installed (http://www.imagemagick.org).
+
+
+
+How to use css_sprite_generator.sh
+----------------------------------
+
+You should create an empty file. For this example, I create test.sprite.
+
+Structure of this file:
+    * The first line define the options for the generated files. You can use this possible parameters:
+        image_target_name : the name (and the path if needed) of the generated sprite image
+        css_target_name   : the name (and the path if needed) of the generated css file
+        css_format        : the default css format. It can be overwrite on each image see below.
+                            list of possible formats:
+                                nor:  Default value, no repeat on the css background image
+                                r  :  Add repeat on the css background image
+                                rx :  Add repeat-x on the css background image
+                                ry :  Add repeat-y on the css background image
+                                now:  Default value, no css width on the element which has the image as background.
+                                w  :  Add css width on the element which has the image as background. It's the image width.
+                                noh:  Default value, no css height on the element which has the image as background.
+                                h  :  Add css height on the element which has the image as background. It's the image height.
+
+                            To combine the css_format separate them by a comma ',' like this css_format=r,w,h
+
+        web_image_path    : the image path to use in the css. This path can be abslute like this: http://www.domain.com/images/
+
+        Example of the syntax with all the parameters:
+        /* image_target_name=output.png css_target_name=output.css css_format=r,w,h web_image_path=http://www.domain.com/images/ */
+
+
+    * The other lines define the images and the css to apply:
+    
+        The syntax:
+            default syntax: image_name:css_selector
+            The script support for advanced sprite these options:
+            image_name(image_widthximage_height):css_selector(css_format)
+            
+            image_name   : the image name (and the path if needed) of the image on the filesystem
+            image_width  : if you want to force the width (the image will be centered horizontally) 
+            image_height : if you want to force the height (the image will be centered vertically) 
+            css_selector : the css selector like ".page #menu"
+            css_format   : It is used to force the css format for this image. See css_format from the first line documentation.
+
+            If you want to add many images on the same line, separated them by '|' in your file. See examples for details.
+
+            Examples:
+                # Add the image named image1.png to the sprite and force its height. The css corresponding is ".menu"
+                image1.png(x400):.menu
+                # Add 2 images on the same line. We force the size and we also add the size in the generated css file.
+                image2.png(150x25):#menu a(w,h)|image3.png(150x25):#menu a:hover(w,h)
+
+        
+    Example of a file's content:
+        /* image_target_name=output.png css_target_name=output.css css_format=r,w,h web_image_path=http://www.domain.com/images/ */
+        image1.png(x400):.menu
+        image2.png(150x25):#menu a(w,h)|image3.png(150x25):#menu a:hover(w,h)
+
+
+    It will generate a sprire like this (the size is not correct):
+
+        --------------
+        |            |
+        |            |
+        |            |
+        |            |
+        | image1.png |
+        |            |
+        |            |
+        |            |
+        |            |
+        ---------------------------
+        |            |            |
+        |            |            |
+        |            |            |
+        |            |            |
+        | image2.png | image3.png |
+        |            |            |
+        |            |            |
+        |            |            |
+        |            |            |
+        ---------------------------
+
+
+    And the css file will look like:
+
+        .menu{
+          background: url(http://www.domain.com/images/output.png) 0px 0px repeat;
+          width: 10px;
+          height: 400px;
+        }
+        
+        #menu a{
+          background: url(http://www.domain.com/images/output.png) 0px -400px repeat;
+          width: 150px;
+          height: 25px;
+        }
+        
+        #menu a:hover{
+          background: url(http://www.domain.com/images/output.png) -150px -400px repeat;
+          width: 150px;
+          height: 25px;
+        }
+
+
