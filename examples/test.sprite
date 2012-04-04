@@ -1,0 +1,6 @@
+/* image_target_name=output.png css_target_name=output.css web_image_path=/images/ */
+img_src/A.png(200x400):.banner
+img_src/A.png(60x60):li.image(r,w,h)|img_src/B.png:.footer a
+img_src/C.png:#menu|img_src/D.png:#menu .submenu(rx)
+img_src/D.png:#menu .submenu a|img_src/E.png:#menu .submenu a:hover
+img_src/B.png(x400):.big

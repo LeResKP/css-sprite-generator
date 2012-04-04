@@ -1,0 +1,35 @@
+
+.banner{
+  background: url(/images/output.png) 0px 0px no-repeat;
+}
+
+li.image{
+  background: url(/images/output.png) 0px -400px repeat;
+  width: 60px;
+  height: 60px;
+}
+
+.footer a{
+  background: url(/images/output.png) -60px -400px no-repeat;
+}
+
+#menu{
+  background: url(/images/output.png) 0px -500px no-repeat;
+}
+
+#menu .submenu{
+  background: url(/images/output.png) -100px -500px repeat-x;
+}
+
+#menu .submenu a{
+  background: url(/images/output.png) 0px -600px no-repeat;
+}
+
+#menu .submenu a:hover{
+  background: url(/images/output.png) -100px -600px no-repeat;
+}
+
+.big{
+  background: url(/images/output.png) 0px -700px no-repeat;
+}
+
